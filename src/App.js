@@ -1,24 +1,33 @@
-import logo from './logo.svg';
+import React, { useState } from "react";
 import './App.css';
+import CovidData from "./CovidData";
 
 function App() {
+  let [currDate, setCurrDate] = useState(new Date().toLocaleDateString());
+  let [currTime, setCurrTime] = useState(new Date().toLocaleTimeString());
+
+  const update = () => {
+    setCurrDate(new Date().toLocaleDateString());
+    setCurrTime(new Date().toLocaleTimeString());
+  }
+
+  setInterval(update, 1000);
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="App">
+        <div className="date-time">
+          <p>{currDate}</p>
+          <p>{currTime}</p>
+        </div>
+        <div className="live-div">
+          <h3 className="live">🔴 Live</h3>
+        </div>
+        <h2>COVID-19 TRACKER</h2>
+        <CovidData />
+      </div>
+    </>
   );
 }
 
