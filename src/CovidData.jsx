@@ -1,16 +1,26 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
+
 
 const CovidData = () => {
 
   const [data, setData] = useState([]);    
   
   const getData = async () => {
-    let res = await fetch("https://api.covid19india.org/data.json");
-    res = await res.json();
-    // console.log(res);
-    // console.log(res.statewise);
-    // console.log(res.statewise[0].active);
-    setData(res.statewise[0])
+    try{
+        // let res = await fetch("https://api.covid19india.org/data.json");
+        // let res = await axios.get("https://api.covid19india.org/data.json");
+        let res = await axios.get("https://cors-anywhere.herokuapp.com/https://api.covid19india.org/data.json");
+        res = await res.json();
+        console.log(res);
+        setData(res.statewise[0]);
+        //console.log(res.statewise);
+        //console.log(res.statewise[0].active);
+    } catch (err){
+        console.log(err);
+    }
+    
+    
   }
 
   useEffect(() => {
@@ -88,3 +98,4 @@ const CovidData = () => {
 }
 
 export default CovidData;
+
